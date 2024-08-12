@@ -218,9 +218,7 @@ const Thead = styled.thead`
 
 const Tbody = styled.tbody``;
 
-const Tr = styled.tr`
-  color: white;
-`;
+const Tr = styled.tr``;
 
 const Th = styled.th`
   padding: 12px;

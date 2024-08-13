@@ -2,6 +2,8 @@
 import { useState } from "react";
 import "./reset.css";
 import styled from "styled-components";
+import MedalPost from "./components/MedalPost";
+import Button from "./components/Button";
 
 const App = () => {
   const [state, setState] = useState([]);
@@ -103,42 +105,11 @@ const App = () => {
         <Button onClick={onClickAddBtn}>국가 추가</Button>
         <Button onClick={onClickUpdateBtn}>업데이트</Button>
       </Function>
-      <TableDiv>
-        {state.length > 0 ? (
-          <Table>
-            <Thead>
-              <Tr>
-                <Th>국가명</Th>
-                <Th>금메달</Th>
-                <Th>은메달</Th>
-                <Th>동메달</Th>
-                <Th>액션</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {state
-                .sort((a, b) => b.gold - a.gold)
-                .map((el) => {
-                  return (
-                    <Tr key={el.id}>
-                      <Td>{el.country}</Td>
-                      <Td>{el.gold}</Td>
-                      <Td>{el.silver}</Td>
-                      <Td>{el.bronze}</Td>
-                      <Td>
-                        <Button onClick={() => onClickDeleteBtn(el.id)}>
-                          삭제
-                        </Button>
-                      </Td>
-                    </Tr>
-                  );
-                })}
-            </Tbody>
-          </Table>
-        ) : (
-          "국가를 추가해 주세요"
-        )}
-      </TableDiv>
+      {state.length === 0 ? (
+        "정보가 없습니다"
+      ) : (
+        <MedalPost state={state} onClickDeleteBtn={onClickDeleteBtn} />
+      )}
     </Wrapper>
   );
 };
@@ -185,46 +156,4 @@ const Input = styled.input`
   border: 1px solid black;
   border-radius: 4px;
   font-size: 14px;
-`;
-
-const Button = styled.button`
-  padding: 10px 20px;
-  background-color: #fc0;
-  color: #333;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 700;
-`;
-
-// 테이블
-const TableDiv = styled.div`
-  width: 100%;
-`;
-
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-  background-color: #e6e6fa;
-`;
-
-const Thead = styled.thead`
-  color: white;
-  background-color: #003580;
-  font-weight: bold;
-`;
-
-const Tbody = styled.tbody``;
-
-const Tr = styled.tr``;
-
-const Th = styled.th`
-  padding: 12px;
-`;
-
-const Td = styled.td`
-  text-align: center;
-  padding: 8px 0;
 `;

@@ -4,6 +4,7 @@ import "./reset.css";
 import styled from "styled-components";
 import MedalPost from "./components/MedalPost";
 import Button from "./components/Button";
+import InputBox from "./components/InputBox";
 
 const App = () => {
   const [state, setState] = useState([]);
@@ -69,39 +70,18 @@ const App = () => {
     <Wrapper>
       <Title>2024 파리 올림픽</Title>
       <Function>
-        <Container>
-          <Label>국가명</Label>
-          <Input
-            type="text"
-            placeholder="국가 입력"
-            value={name}
-            onChange={(el) => setName(el.target.value)}
-          />
-        </Container>
-        <Container>
-          <Label>금메달</Label>
-          <Input
-            type="number"
-            value={gMedal}
-            onChange={(el) => setGMedal(el.target.value)}
-          />
-        </Container>
-        <Container>
-          <Label>은메달</Label>
-          <Input
-            type="number"
-            value={sMedal}
-            onChange={(el) => setSMedal(el.target.value)}
-          />
-        </Container>
-        <Container>
-          <Label>동메달</Label>
-          <Input
-            type="number"
-            value={bMedal}
-            onChange={(el) => setBMedal(el.target.value)}
-          />
-        </Container>
+        <InputBox value={name} setvalue={setName}>
+          국가명
+        </InputBox>
+        <InputBox value={gMedal} setvalue={setGMedal}>
+          금메달
+        </InputBox>
+        <InputBox value={sMedal} setvalue={setSMedal}>
+          은메달
+        </InputBox>
+        <InputBox value={bMedal} setvalue={setBMedal}>
+          동메달
+        </InputBox>
         <Button onClick={onClickAddBtn}>국가 추가</Button>
         <Button onClick={onClickUpdateBtn}>업데이트</Button>
       </Function>
@@ -137,23 +117,4 @@ const Title = styled.h1`
 const Function = styled.div`
   display: flex;
   gap: 14px;
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const Label = styled.label`
-  margin-bottom: 8px;
-  font-size: 20px;
-  font-weight: 600;
-`;
-
-const Input = styled.input`
-  padding: 10px;
-  border: 1px solid black;
-  border-radius: 4px;
-  font-size: 14px;
 `;

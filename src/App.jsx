@@ -7,7 +7,7 @@ import Button from "./components/Button";
 import InputBox from "./components/InputBox";
 
 const App = () => {
-  const [state, setState] = useState([]);
+  const [list, setList] = useState([]);
   const [name, setName] = useState("");
   const [gMedal, setGMedal] = useState(0);
   const [sMedal, setSMedal] = useState(0);
@@ -15,7 +15,7 @@ const App = () => {
 
   // 추가 버튼
   const onClickAddBtn = () => {
-    if (state.filter((el) => el.country === name).length > 0) {
+    if (list.filter((el) => el.country === name).length > 0) {
       alert("동일한 국가가 존재 합니다");
     } else if (name === "") {
       alert("국가명을 입력하세요");
@@ -23,11 +23,11 @@ const App = () => {
       const newList = {
         id: crypto.randomUUID(),
         country: name,
-        gold: gMedal,
-        silver: sMedal,
-        bronze: bMedal,
+        gold: +gMedal,
+        silver: +sMedal,
+        bronze: +bMedal,
       };
-      setState([...state, newList]);
+      setList([...list, newList]);
       setName("");
       setGMedal(0);
       setSMedal(0);
@@ -37,26 +37,26 @@ const App = () => {
 
   // 삭제 버튼
   const onClickDeleteBtn = (id) => {
-    const delState = state.filter((el) => el.id !== id);
-    setState(delState);
+    const delState = list.filter((el) => el.id !== id);
+    setList(delState);
   };
 
   // 업데이트 버튼
   const onClickUpdateBtn = () => {
-    if (state.filter((el) => el.country === name).length > 0) {
-      const indexNum = state.indexOf(
-        state.filter((el) => el.country === name)[0]
+    if (list.filter((el) => el.country === name).length > 0) {
+      const indexNum = list.indexOf(
+        list.filter((el) => el.country === name)[0]
       );
       const updateList = {
         id: crypto.randomUUID(),
         country: name,
-        gold: gMedal,
-        silver: sMedal,
-        bronze: bMedal,
+        gold: +gMedal,
+        silver: +sMedal,
+        bronze: +bMedal,
       };
-      let copyState = [...state];
+      let copyState = [...list];
       copyState[indexNum] = updateList;
-      setState(copyState);
+      setList(copyState);
       setName("");
       setGMedal(0);
       setSMedal(0);
@@ -85,10 +85,10 @@ const App = () => {
         <Button onClick={onClickAddBtn}>국가 추가</Button>
         <Button onClick={onClickUpdateBtn}>업데이트</Button>
       </Function>
-      {state.length === 0 ? (
+      {list.length === 0 ? (
         "정보가 없습니다"
       ) : (
-        <MedalPost state={state} onClickDeleteBtn={onClickDeleteBtn} />
+        <MedalPost list={list} onClickDeleteBtn={onClickDeleteBtn} />
       )}
     </Wrapper>
   );

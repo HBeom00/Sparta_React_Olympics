@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Button from "./Button";
 
-const MedalPost = ({ state, onClickDeleteBtn }) => {
+const MedalPost = ({ list, onClickDeleteBtn }) => {
   return (
     <TableDiv>
       <Table>
@@ -15,7 +15,7 @@ const MedalPost = ({ state, onClickDeleteBtn }) => {
           </Tr>
         </Thead>
         <Tbody>
-          {state
+          {list
             .sort((a, b) => b.gold - a.gold)
             .map((el) => {
               return (
